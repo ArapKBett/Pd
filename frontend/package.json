@@ -1,0 +1,15 @@
+{
+  "name": "pitch-deck-evaluator",
+  "version": "0.1.0",
+  "dependencies": {
+    "axios": "^1.4.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-chartjs-2": "^4.3.1",
+    "chart.js": "^3.9.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build"
+  }
+}
