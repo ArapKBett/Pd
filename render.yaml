@@ -2,7 +2,6 @@ services:
   - type: web
     name: pitch-deck-backend
     env: python
-    region: oregon
     plan: free
     branch: main
     rootDir: backend
@@ -20,19 +19,17 @@ services:
   - type: web
     name: pitch-deck-frontend
     env: static
-    region: oregon
     plan: free
     branch: main
     rootDir: frontend
     buildCommand: npm install && npm run build
-    staticPublishPath: build  # Corrected field
+    staticPublishPath: build
     envVars:
       - key: REACT_APP_BACKEND_URL
         value: https://pitch-deck-backend.onrender.com
   - type: pserv
     name: pitch-deck-cron
     env: python
-    region: oregon
     plan: free
     branch: main
     rootDir: backend
@@ -49,4 +46,3 @@ services:
 databases:
   - name: pitch-deck-db
     databaseName: pitch_deck_db
-    region: oregon
