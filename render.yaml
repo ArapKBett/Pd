@@ -1,0 +1,52 @@
+services:
+  - type: web
+    name: pitch-deck-backend
+    env: python
+    region: oregon
+    plan: free
+    branch: main
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn --bind 0.0.0.0:$PORT app:app
+    envVars:
+      - key: MONGO_URI
+        fromDatabase:
+          name: pitch-deck-db
+          property: connectionString
+      - key: CRUNCHBASE_API_KEY
+        sync: false  # Add manually in Render Dashboard
+      - key: FRONTEND_URL
+        value: https://pitchdeck.onrender.com
+  - type: web
+    name: pitch-deck-frontend
+    env: static
+    region: oregon
+    plan: free
+    branch: main
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    publishPath: build
+    envVars:
+      - key: REACT_APP_BACKEND_URL
+        value: https://pitch-deck-backend.onrender.com
+  - type: pserv
+    name: pitch-deck-cron
+    env: python
+    region: oregon
+    plan: free
+    branch: main
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: python scrape.py
+    schedule: "0 0 * * *"  # Daily at midnight
+    envVars:
+      - key: MONGO_URI
+        fromDatabase:
+          name: pitch-deck-db
+          property: connectionString
+      - key: CRUNCHBASE_API_KEY
+        sync: false
+databases:
+  - name: pitch-deck-db
+    databaseName: pitch_deck_db
+    region: oregon
