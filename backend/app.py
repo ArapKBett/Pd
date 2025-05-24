@@ -23,7 +23,7 @@ app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": os.getenv("FRONTEND_URL", "*")}})  # Allow frontend URL
 
 # MongoDB setup
-mongo_uri = os.getenv("MONGO_URI", "mongodb+srv://ArapAne:1995Arap@cysec.jyxmnlp.mongodb.net/?retryWrites=true&w=majority&appName=CySec")
+mongo_uri = os.getenv("MONGO_URI", "mongodb+srv://ArapAne:<>@cysec.jyxmnlp.mongodb.net/?retryWrites=true&w=majority&appName=Cy")
 client = pymongo.MongoClient(mongo_uri)
 db = client["pitch_deck_db"]
 decks_collection = db["decks"]
