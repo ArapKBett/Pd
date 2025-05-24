@@ -25,7 +25,7 @@ services:
     branch: main
     rootDir: frontend
     buildCommand: npm install && npm run build
-    publishPath: build
+    publishDir: build  # Changed from publishPath to publishDir
     envVars:
       - key: REACT_APP_BACKEND_URL
         value: https://pitch-deck-backend.onrender.com
